@@ -1,12 +1,16 @@
 #include makefile.include
 
+MYNAT := MynatDefinition Comparison MynatAdd MynatNat MynatString Mynat
+MYINT := MyintDefinition Myint
+MYNUM := $(MYNAT) $(MYINT) Mynum
+
 .phony: execute check clean depend
 
 FSTAR := fstar.exe
 ML_DIR := ml
 CACHE_DIR := cache
 EXE := Main
-SRC := MynatDefinition Comparison MynatAdd NatMynat MynatString Mynat Main
+SRC := $(MYNUM) Main
 
 OCAML_SRC_BASE := $(addprefix $(ML_DIR)/, $(SRC))
 OCAML_CMX := $(addsuffix .cmx, $(OCAML_SRC_BASE))

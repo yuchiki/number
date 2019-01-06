@@ -1,4 +1,4 @@
-module NatMynat
+module MynatNat
 
 open MynatDefinition
 
