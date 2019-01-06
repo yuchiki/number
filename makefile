@@ -6,7 +6,7 @@ FSTAR := fstar.exe
 ML_DIR := ml
 CACHE_DIR := cache
 EXE := Main
-SRC := MynatDefinition Comparison NatMynat MynatString Mynat Main
+SRC := MynatDefinition Comparison MynatAdd NatMynat MynatString Mynat Main
 
 OCAML_SRC_BASE := $(addprefix $(ML_DIR)/, $(SRC))
 OCAML_CMX := $(addsuffix .cmx, $(OCAML_SRC_BASE))
