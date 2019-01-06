@@ -24,3 +24,12 @@ val mycommutativity : m:mynat -> n:mynat -> Lemma (myadd m n = myadd n m)
 let rec mycommutativity m n = match m with
     | Zero -> myidentr n
     | Succ m1 -> mycommutativity m1 (Succ n)
+
+val myassociativity : l:mynat -> m:mynat -> n:mynat -> Lemma (myadd (myadd l m) n = myadd l (myadd m n))
+let rec myassociativity l m n = match l with
+    | Zero -> ()
+    | Succ l1 ->
+        succplus l1 m;
+        succplus (myadd l1 m) n;
+        succplus l1 (myadd m n);
+        myassociativity l1 m n
