@@ -3,33 +3,40 @@ module MynatAdd
 open MynatDefinition
 open Comparison
 
-val myadd : mynat -> mynat -> mynat
-let rec myadd m n = match m with
+val mynatadd : mynat -> mynat -> mynat
+let rec mynatadd m n = match m with
     | Zero -> n
-    | Succ m1 -> myadd m1 (Succ n)
+    | Succ m1 -> mynatadd m1 (Succ n)
 
-val succplus : m:mynat -> n:mynat -> Lemma (myadd (Succ m) n = Succ (myadd m n))
-let rec succplus m n = match m with
+val mynatsuccplus : m:mynat -> n:mynat -> Lemma (mynatadd (Succ m) n = Succ (mynatadd m n))
+let rec mynatsuccplus m n = match m with
     | Zero -> ()
-    | Succ m1 -> succplus m1 (Succ n)
+    | Succ m1 -> mynatsuccplus m1 (Succ n)
 
 
-val myidentr : m:mynat -> Lemma (myadd m Zero = m)
-let rec myidentr = function
+val mynatidentr : m:mynat -> Lemma (mynatadd m Zero = m)
+let rec mynatidentr = function
     | Zero -> ()
-    | Succ m1 -> succplus m1 Zero; myidentr m1
+    | Succ m1 -> mynatsuccplus m1 Zero; mynatidentr m1
 
 
-val mycommutativity : m:mynat -> n:mynat -> Lemma (myadd m n = myadd n m)
-let rec mycommutativity m n = match m with
-    | Zero -> myidentr n
-    | Succ m1 -> mycommutativity m1 (Succ n)
+val mynatcommutativity : m:mynat -> n:mynat -> Lemma (mynatadd m n = mynatadd n m)
+let rec mynatcommutativity m n = match m with
+    | Zero -> mynatidentr n
+    | Succ m1 -> mynatcommutativity m1 (Succ n)
 
-val myassociativity : l:mynat -> m:mynat -> n:mynat -> Lemma (myadd (myadd l m) n = myadd l (myadd m n))
-let rec myassociativity l m n = match l with
+val mynatassociativity : l:mynat -> m:mynat -> n:mynat -> Lemma (mynatadd (mynatadd l m) n = mynatadd l (mynatadd m n))
+let rec mynatassociativity l m n = match l with
     | Zero -> ()
     | Succ l1 ->
-        succplus l1 m;
-        succplus (myadd l1 m) n;
-        succplus l1 (myadd m n);
-        myassociativity l1 m n
+        mynatsuccplus l1 m;
+        mynatsuccplus (mynatadd l1 m) n;
+        mynatsuccplus l1 (mynatadd m n);
+        mynatassociativity l1 m n
+
+
+val mynatsuccplusr : m:mynat -> n:mynat -> Lemma (mynatadd m (Succ n) = Succ (mynatadd m n))
+let mynatsuccplusr m n =
+    mynatcommutativity m (Succ n);
+    mynatsuccplus n m;
+    mynatcommutativity n m

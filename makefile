@@ -1,7 +1,7 @@
 #include makefile.include
 
 MYNAT := MynatDefinition Comparison MynatAdd MynatNat MynatString Mynat
-MYINT := MyintDefinition Myint
+MYINT := MyintDefinition MyintAdd MyintComparison  Myint
 MYNUM := $(MYNAT) $(MYINT) Mynum
 
 .phony: execute check clean depend
