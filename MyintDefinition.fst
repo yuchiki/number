@@ -30,3 +30,7 @@ let myintzero = (Zero, Zero)
 
 val myintinzero : myint -> bool
 let myintiszero n = myinteq n myintzero
+
+
+val zero_has_same_l_r : m:myint{iszero m} -> Lemma(fst m = snd m)
+let zero_has_same_l_r m = admit ()
